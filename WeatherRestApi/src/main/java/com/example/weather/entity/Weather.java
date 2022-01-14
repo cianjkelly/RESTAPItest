@@ -15,7 +15,7 @@ import javax.persistence.IdClass;
 public class Weather {
     @Id
     @Column(name = "SENSOR_ID")
-    private String sensorId;
+    private int sensorId;
 
     @Id
     @Column(name = "CITY")
@@ -26,14 +26,15 @@ public class Weather {
     private String country;
 
     @Column(name = "TEMPERATURE")
-    private String temperature;
+    private int temperature;
 
     @Column(name = "HUMIDITY")
-    private String humidity;
+    private int humidity;
 
     @Column(name = "WIND_SPEED")
-    private String windSpeed;
+    private int windSpeed;
 
+    @Id
     @Column(name = "DATES")
     private String date;
 }

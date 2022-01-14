@@ -1,0 +1,10 @@
+{
+  "_class": "com.fiserv.merchantmaintenance.entities.Weather",
+  "sensorId": "3",
+  "city": "Wicklow",
+  "country": "Ireland",
+  "temperature": 9,
+  "humidity": 70,
+  "windSpeed": 25,
+  "date": "20220107"
+}

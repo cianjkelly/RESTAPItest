@@ -15,18 +15,18 @@ public interface WeatherDao extends JpaRepository<Weather, String> {
     @Query(value = SqlQuery.GET_DATE, nativeQuery = true)
     String getDate();
 
-    @Query(value = SqlQuery.GET_WEATHER, nativeQuery = true)
+    @Query(value = SqlQuery.GET_ALL_WEATHER, nativeQuery = true)
     List<Weather> getWeather(int sensorId, String city, String country, String date, String daysAgo);
 
     @Modifying
     @Transactional
     @Query(value = SqlQuery.UPDATE_WEATHER, nativeQuery = true)
-    void updateWeather(String sensorId, String city, String country, String temperature, String humidity, String windSpeed, String date);
+    void updateWeather(int sensorId, String city, String country, int temperature, int humidity, int windSpeed, String date);
 
     @Modifying
     @Transactional
     @Query(value = SqlQuery.INSERT_WEATHER, nativeQuery = true)
-    void insertWeather(String sensorId, String city, String country, String temperature, String humidity, String windSpeed, String date);
+    void insertWeather(int sensorId, String city, String country, int temperature, int humidity, int windSpeed, String date);
 
     @Modifying
     @Transactional
@@ -39,9 +39,9 @@ public interface WeatherDao extends JpaRepository<Weather, String> {
     void addValue();
 
     @Query(value = SqlQuery.GET_WEATHER_UNIQUE, nativeQuery = true)
-    List<Weather> checkIfUniqueReading(String sensorId, String city, String country, String date);
+    List<Weather> checkIfUniqueReading(int sensorId, String city, String country, String date);
 
-    @Query(value = SqlQuery.GET_ALL_WEATHER, nativeQuery = true)
+    @Query(value = SqlQuery.GET_WEATHER, nativeQuery = true)
     List<Weather> getall();
 
     @Modifying

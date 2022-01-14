@@ -25,17 +25,20 @@ public class WeatherServiceImpl implements WeatherService {
     @Override
     public ResponseType getWeatherService(String dates, int sensorId, String city, String country, String metrics) throws ParseException {
 
+//        this.weatherDao.dropTable();
+//
 //        this.weatherDao.createWeather();
 
 //        this.weatherDao.addValue();
 
-//        this.weatherDao.dropTable();
 
         metrics = metrics.replace(",", "");
 
         String todaysDate = this.weatherDao.getDate();
 
         List<Weather> weather = null;
+        
+        weather = this.weatherDao.getall();
 
         if(metrics.contains("ALL")){
             weather = this.weatherDao.getWeather(sensorId, city, country, todaysDate, getOldDates(Integer.parseInt(dates), todaysDate));
@@ -58,8 +61,31 @@ public class WeatherServiceImpl implements WeatherService {
             weather = this.weatherDao.getWeatherHum(sensorId, city, country, todaysDate, getOldDates(Integer.parseInt(dates), todaysDate));
         }
 
+        int avgTemp = 0;
+        int avgWindSpeed = 0;
+        int avgHumidity = 0;
+
+        for(int i = 0; i < weather.size(); i++){
+            avgTemp += weather.get(i).getTemperature();
+            avgHumidity += weather.get(i).getHumidity();
+            avgWindSpeed += weather.get(i).getWindSpeed();
+        }
+
+        Weather avgWeather = new Weather();
+
+        if(!weather.isEmpty()) {
+
+            avgWeather.setTemperature(avgTemp / weather.size());
+            avgWeather.setHumidity(avgHumidity / weather.size());
+            avgWeather.setWindSpeed(avgWindSpeed / weather.size());
+            avgWeather.setCity(city);
+            avgWeather.setSensorId(sensorId);
+            avgWeather.setCountry(country);
+            avgWeather.setDate(getOldDates(Integer.parseInt(dates), todaysDate));
+        }
+
        ResponseType responseType = new ResponseType();
-       responseType.setData(weather);
+       responseType.setData(avgWeather);
 
        return responseType;
     }

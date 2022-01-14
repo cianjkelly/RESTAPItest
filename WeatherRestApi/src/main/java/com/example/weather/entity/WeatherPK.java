@@ -11,7 +11,8 @@ public class WeatherPK implements Serializable{
 
     private static final long serialVersionUID = 6875973361769941183L;
 
-    private String sensorId;
+    private int sensorId;
     private String city;
     private String country;
+    private String date;
 }
